@@ -11,11 +11,56 @@
 </head>
 
 <body>
-  <div class="border-dashed" id="app">
-    <h1 class="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+  <div class="h-full w-full flex justify-center items-center flex-col">
+    <div class="shadow border heading   h-full w-full  flex justify-center items-center text-[40px]" id="app">
+      <nav class="w-full flex items-center justify-between pr-4 pl-4">
+        <a class="user" href="/">Username</a>
+        <a class="avatar" href=""><img class="" src="/images/monk.png" alt="monk"></a>
+      </nav>
+    </div>
+    <div class="flex justify-center items-center text-[24px] p-10" id="ADD_TASK">
+      <form>
+          <label for="fname">Add Task ></label>
+          <input class="inputTask shadow"  type="text" id="addTask" name="add_task">
+      </form>    
+    </div>
   </div>
+  <div class="h-full w-full grid grid-cols-2 gap-8 justify-center items-start text-[24px] pr-8 pl-8" id="TASK">
+    <!-- TO DO -->
+    <div>
+      <fieldset class="p-4 border rounded-lg">
+        <legend class="font-bold mb-2">Things to do</legend>
+        <div class="todo-list">
+          <div>
+            <input type="checkbox" id="task1" />
+            <label for="task1">Task 1</label>
+          </div>
+          <div>
+            <input type="checkbox" id="task2" />
+            <label for="task2">Task 2</label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  
+    <!-- DONE -->
+    <div>
+      <fieldset class="p-4 border rounded-lg">
+        <legend class="font-bold mb-2">Things Done</legend>
+        <div class="done-list">
+          <div>
+            <input type="checkbox" id="task3" checked />
+            <label for="task3">Task 3</label>
+          </div>
+          <div>
+            <input type="checkbox" id="task4" checked />
+            <label for="task4">Task 4</label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 
