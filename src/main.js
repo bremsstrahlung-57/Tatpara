@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { redirectIfNotAuthenticated, handleLogout } from "./auth";
 import Toastify from "toastify-js";
 
 function taskAddedAlert() {
@@ -24,6 +25,7 @@ const fetchAndDisplayTasks = async () => {
   try {
     const { data, error } = await supabase.from("tatpara_user_task").select(`
             id,
+            userid,
             task_done(id,task),
             to_do(id,task_todo)`);
 
@@ -62,7 +64,6 @@ const fetchAndDisplayTasks = async () => {
       }
     });
 
-    // Display done tasks
     data.forEach((task) => {
       if (task.task_done && task.task_done.id) {
         const taskDiv = document.createElement("div");
@@ -92,10 +93,18 @@ const fetchAndDisplayTasks = async () => {
   }
 };
 
-const taskInput = document.getElementById("task-input-field");
-
-const addButton = document.getElementById("task-input");
-// addButton.addEventListener("click", addNewTask);
-
-
-fetchAndDisplayTasks();
+// Check authentication on page load
+document.addEventListener('DOMContentLoaded', async () => {
+  // Redirect to login if not authenticated
+  const isAuthenticated = await redirectIfNotAuthenticated();
+  if (!isAuthenticated) return;
+  
+  // Set up logout button click handler
+  const logoutButton = document.getElementById('logout-btn');
+  if (logoutButton) {
+    logoutButton.addEventListener('click', handleLogout);
+  }
+  
+  // Initialize tasks
+  await fetchAndDisplayTasks();
+});
