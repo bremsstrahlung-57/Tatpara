@@ -1,0 +1,29 @@
+[33mcommit 7f1559fbf7ede69dba124b139475fdfb06a1d792[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/my-changes[m[33m, [m[1;31morigin/feature/task-updates[m[33m, [m[1;31morigin/feature/my-changes[m[33m, [m[1;32mfeature/task-updates[m[33m)[m
+Author: Sagar <sagar292905@gmail.com>
+Date:   Tue Apr 15 22:48:07 2025 +0530
+
+    Added task management functionality and updated styles
+
+[33mcommit eb88ec079215737a132a56d5bb77a435986dea86[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Sagar <sagar292905@gmail.com>
+Date:   Sun Apr 13 13:55:58 2025 +0530
+
+    Setup and github workflow
+
+[33mcommit d17e7e3a3268bd9596f0c5b586141c68689f6a41[m
+Author: Sagar <sagar292905@gmail.com>
+Date:   Sun Apr 13 13:43:03 2025 +0530
+
+    Setup
+
+[33mcommit 4928cf3b0c6f61815b65d035ee7f18cc0d22b1f3[m
+Author: Sagar <sagar292905@gmail.com>
+Date:   Sun Apr 13 13:31:02 2025 +0530
+
+    first
+
+[33mcommit 57773694e7fb408bec1c5d9bfd9eb9908472f0da[m
+Author: Sagar <sagar292905@gmail.com>
+Date:   Sat Apr 12 20:10:40 2025 +0530
+
+    README.md
