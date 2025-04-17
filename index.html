@@ -20,9 +20,11 @@
     </div>
     <div class="flex justify-center items-center text-[24px] p-10" id="ADD_TASK">
       <form>
-          <label for="fname">Add Task ></label>
-          <input class="inputTask shadow"  type="text" id="addTask" name="add_task">
-      </form>    
+        <label for="fname">
+          <button class="border point pr-4 pl-4" id="task-input">Add Task</button>
+        </label>
+        <input class="inputTask shadow" type="text" id="task-input-field" placeholder="Lock in" name="add_task" >
+      </form>
     </div>
   </div>
   <div class="h-full w-full grid grid-cols-2 gap-8 justify-center items-start text-[24px] pr-8 pl-8" id="TASK">
@@ -31,31 +33,15 @@
       <fieldset class="p-4 border rounded-lg">
         <legend class="font-bold mb-2">Things to do</legend>
         <div class="todo-list">
-          <div>
-            <input type="checkbox" id="task1" />
-            <label for="task1">Task 1</label>
-          </div>
-          <div>
-            <input type="checkbox" id="task2" />
-            <label for="task2">Task 2</label>
-          </div>
         </div>
       </fieldset>
     </div>
-  
+
     <!-- DONE -->
     <div>
       <fieldset class="p-4 border rounded-lg">
         <legend class="font-bold mb-2">Things Done</legend>
         <div class="done-list">
-          <div>
-            <input type="checkbox" id="task3" checked />
-            <label for="task3">Task 3</label>
-          </div>
-          <div>
-            <input type="checkbox" id="task4" checked />
-            <label for="task4">Task 4</label>
-          </div>
         </div>
       </fieldset>
     </div>
