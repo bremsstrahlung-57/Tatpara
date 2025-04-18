@@ -10,45 +10,100 @@
   <title>Tatpara</title>
 </head>
 
-<body>
+<body class="crt">
   <div class="h-full w-full flex justify-center items-center flex-col">
-    <div class="shadow border heading   h-full w-full  flex justify-center items-center text-[40px]" id="app">
+    <div class="shadow border heading h-full w-full flex justify-center items-center text-[40px] rpg-border" id="app">
       <nav class="w-full flex items-center justify-between pr-4 pl-4">
         <a class="user" href="/story.html">Story</a>
-        <a class="avatar" href=""><img class="" src="/images/monk.png" alt="monk"></a>
-        <button id="logout-btn" class="user">Logout</button>
+        <div class="flex items-center gap-4">
+          <!-- <div class="rpg-heading text-xl">Tatpara</div> -->
+          <a class="avatar point" href="#">
+            <img class="" src="/images/monk.png" alt="monk">
+          </a>
+        </div>
       </nav>
     </div>
-    <div class="flex justify-center items-center text-[24px] p-10" id="ADD_TASK">
-      <form>
-        <label for="fname">
-          <button class="border point pr-4 pl-4" id="task-input">Add Task</button>
-        </label>
-        <input class="inputTask shadow" type="text" id="task-input-field" placeholder="Lock in" name="add_task" >
-      </form>
-    </div>
-  </div>
-  <div class="h-full w-full grid grid-cols-2 gap-8 justify-center items-start text-[24px] pr-8 pl-8" id="TASK">
-    <!-- TO DO -->
-    <div>
-      <fieldset class="p-4 border rounded-lg">
-        <legend class="font-bold mb-2">Things to do</legend>
-        <div class="todo-list">
+    
+    <!-- Focus Timer Section -->
+    <div class="shadow border m-4 p-6 w-full max-w-md flex flex-col items-center rounded-lg rpg-border">
+      <h2 class="rpg-heading text-2xl mb-4">Focus Timer</h2>
+      <div class="flex items-center justify-center mb-4">
+        <button id="decrease-time" class="time-adjust-btn">-</button>
+        <div class="text-3xl mx-4" id="timer-display">25:00</div>
+        <button id="increase-time" class="time-adjust-btn">+</button>
+      </div>
+      
+      <div class="flex space-x-4 mb-6">
+        <button id="start-timer" class="focus-btn bg-green-600 hover:bg-green-700">Start Focus</button>
+        <button id="pause-timer" class="focus-btn bg-yellow-600 hover:bg-yellow-700" disabled>Pause</button>
+        <button id="reset-timer" class="focus-btn bg-red-600 hover:bg-red-700" disabled>Reset</button>
+        <button id="fullscreen-toggle" class="focus-btn bg-purple-600 hover:bg-purple-700">Fullscreen</button>
+      </div>
+      
+      <!-- Experience Bar -->
+      <div class="w-full mb-2 xp-container">
+        <div class="flex justify-between text-sm mb-1">
+          <div class="flex items-center">
+            <div class="level-badge"><span id="level-display">1</span></div>
+            <span class="rpg-heading">Level</span>
+          </div>
+          <span><span id="current-xp">0</span>/<span id="xp-to-level">100</span> XP</span>
         </div>
-      </fieldset>
+        <div class="w-full bg-gray-800 rounded-full h-2.5">
+          <div id="xp-progress" class="h-2.5 rounded-full" style="width: 0%"></div>
+        </div>
+      </div>
+      
+      <!-- Session Stats -->
+      <div class="mt-4 w-full stats-container">
+        <div class="flex justify-between items-center">
+          <div>
+            <span class="stats-label">Sessions Completed:</span> 
+            <span class="stats-value" id="sessions-count">0</span>
+          </div>
+          <div>
+            <span class="stats-label">Total Focus Time:</span> 
+            <span class="stats-value" id="total-focus-time">0</span> min
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- DONE -->
-    <div>
-      <fieldset class="p-4 border rounded-lg">
-        <legend class="font-bold mb-2">Things Done</legend>
-        <div class="done-list">
+    <div class="w-full max-w-md mb-10">
+      <div class="music-controls">
+        <h2 class="rpg-heading text-xl mb-4 text-center">Background Music</h2>
+        <div class="flex justify-center items-center m-2 p-2 text-3xl">
+          <button id="previous"
+            class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px]">
+            <a class="glow">
+              previous
+            </a>
+          </button>
+          <button id="play"
+            class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px]">
+            <a class="glow">
+              play
+            </a>
+          </button>
+          <button id="pause"
+            class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px]">
+            <a class="glow">
+              pause
+            </a>
+          </button>
+          <button id="next"
+            class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px]">
+            <a class="glow">
+              next
+            </a>
+          </button>
         </div>
-      </fieldset>
+      </div>
     </div>
   </div>
 
   <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/player.js"></script>
 </body>
 
 </html>
