@@ -1,0 +1,19 @@
+@import url("./style.css");
+
+@media screen and (max-width: 480px) {
+    .mobile{
+        width: 85%;
+    }    
+    .mobile-btn{
+        padding: 0px;
+    }
+    .mobile-btn-bgm{
+        padding: 1px;
+    }
+    .font32MOBILE{
+        font-size: 32px;
+    }
+    .wImgMOBILE{
+        width: 48px;
+    }
+}
