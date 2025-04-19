@@ -17,7 +17,6 @@
       <nav class="w-full flex items-center justify-between pr-4 pl-4">
         <a class="user font32MOBILE" href="/story.html">Story</a>
         <div class="flex items-center gap-4">
-          <!-- <div class="rpg-heading text-xl">Tatpara</div> -->
           <a class="avatar point" href="#">
             <img class="wImgMOBILE" src="/images/monk.png" alt="monk">
           </a>
@@ -76,35 +75,99 @@
         <div class="flex justify-center items-center m-2 p-2 text-3xl">
           <button id="previous"
             class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px] mobile-btn-bgm">
-            <a class="glow">
-              previous
-            </a>
+            <a class="glow">previous</a>
           </button>
           <button id="play"
             class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px] mobile-btn-bgm">
-            <a class="glow">
-              play
-            </a>
+            <a class="glow">play</a>
           </button>
           <button id="pause"
             class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px] mobile-btn-bgm">
-            <a class="glow">
-              pause
-            </a>
+            <a class="glow">pause</a>
           </button>
           <button id="next"
             class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px] mobile-btn-bgm">
-            <a class="glow">
-              next
-            </a>
+            <a class="glow">next</a>
           </button>
         </div>
+      </div>
+    </div>
+
+    <!-- Your Journey Tabs Section -->
+    <div class="rpg-border mt-6 w-full max-w-md p-4">
+      <h2 class="rpg-heading text-2xl mb-4">Your Journey</h2>
+      
+      <div class="tabs flex border-b border-rpg-dark-gold">
+        <button id="focus-tab-button" class="tab-btn px-4 py-2 border-b-2 border-rpg-gold">Focus</button>
+        <button id="story-tab-button" class="tab-btn px-4 py-2">Story</button>
+        <button id="tasks-tab-button" class="tab-btn px-4 py-2">Tasks</button>
+      </div>
+      
+      <div id="focus-container" class="py-4">
+        <!-- Your existing focus timer content here -->
+        <!-- Already integrated above -->
+      </div>
+      
+      <div id="story-container" class="py-4" style="display: none;">
+        <div class="rpg-border p-4 bg-opacity-50 bg-black">
+          <div id="story-content" class="mb-4 max-h-80 overflow-y-auto scrollbar pr-2"></div>
+          <div id="next-story-info" class="mt-4 text-rpg-gold"></div>
+        </div>
+      </div>
+      
+      <div id="tasks-container" class="py-4" style="display: none;">
+        <!-- Your tasks content (if any) -->
       </div>
     </div>
   </div>
 
   <script type="module" src="/src/main.js"></script>
   <script type="module" src="/src/player.js"></script>
+
+  <!-- Tab Switching Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const focusTabButton = document.getElementById('focus-tab-button');
+      const storyTabButton = document.getElementById('story-tab-button');
+      const tasksTabButton = document.getElementById('tasks-tab-button');
+
+      const focusContainer = document.getElementById('focus-container');
+      const storyContainer = document.getElementById('story-container');
+      const tasksContainer = document.getElementById('tasks-container');
+
+      if (focusTabButton && storyTabButton && tasksTabButton) {
+        focusTabButton.addEventListener('click', function () {
+          focusContainer.style.display = 'block';
+          storyContainer.style.display = 'none';
+          tasksContainer.style.display = 'none';
+
+          focusTabButton.classList.add('border-rpg-gold');
+          storyTabButton.classList.remove('border-rpg-gold');
+          tasksTabButton.classList.remove('border-rpg-gold');
+        });
+
+        storyTabButton.addEventListener('click', function () {
+          focusContainer.style.display = 'none';
+          storyContainer.style.display = 'block';
+          tasksContainer.style.display = 'none';
+
+          focusTabButton.classList.remove('border-rpg-gold');
+          storyTabButton.classList.add('border-rpg-gold');
+          tasksTabButton.classList.remove('border-rpg-gold');
+        });
+
+        tasksTabButton.addEventListener('click', function () {
+          focusContainer.style.display = 'none';
+          storyContainer.style.display = 'none';
+          tasksContainer.style.display = 'block';
+
+          focusTabButton.classList.remove('border-rpg-gold');
+          storyTabButton.classList.remove('border-rpg-gold');
+          tasksTabButton.classList.add('border-rpg-gold');
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>

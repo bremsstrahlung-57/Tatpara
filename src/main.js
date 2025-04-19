@@ -1,6 +1,15 @@
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
 
+// --- Story System Start
+import StoryManager from './storymanager.js';
+
+const storyTabButton = document.getElementById("story-tab-button");
+const storyContainer = document.getElementById("story-container");
+const storyContent = document.getElementById("story-content");
+const nextStoryInfo = document.getElementById("next-story-info");
+// --- Story System End
+
 const avatarImg = document.querySelector(".avatar img");
 const timerDisplay = document.getElementById("timer-display");
 const startTimerBtn = document.getElementById("start-timer");
@@ -86,327 +95,167 @@ function initializeApp() {
   document.addEventListener("keydown", handleKeyboardShortcuts);
 
   document.addEventListener("fullscreenchange", handleFullscreenChange);
+
+  // --- Story System Start
+  const storyManager = initializeStorySystem();
+  // --- Story System End
 }
 
-function updateTimerDisplay() {
-  const minutes = Math.floor(secondsRemaining / 60);
-  const seconds = secondsRemaining % 60;
-  timerDisplay.textContent = `${String(minutes).padStart(2, "0")}:${String(
-    seconds
-  ).padStart(2, "0")}`;
-}
+// --- Story System Start
+function initializeStorySystem() {
+  const storyManager = new StoryManager(userData.level);
+  updateStoryUI(storyManager);
 
-function increaseTime() {
-  if (isRunning) return;
-
-  focusMinutes += TIME_INCREMENT;
-  secondsRemaining = focusMinutes * 60;
-
-  userData.focusMinutes = focusMinutes;
-  saveUserData();
-
-  updateTimerDisplay();
-  showToast(`Focus time set to ${focusMinutes} minutes`, "info");
-}
-
-function decreaseTime() {
-  if (isRunning) return;
-
-  if (focusMinutes <= MIN_FOCUS_MINUTES) {
-    showToast(`Minimum focus time is ${MIN_FOCUS_MINUTES} minutes`, "warning");
-    return;
-  }
-
-  focusMinutes -= TIME_INCREMENT;
-  secondsRemaining = focusMinutes * 60;
-
-  userData.focusMinutes = focusMinutes;
-  saveUserData();
-
-  updateTimerDisplay();
-  showToast(`Focus time set to ${focusMinutes} minutes`, "info");
-}
-
-function startTimer() {
-  if (isRunning) return;
-
-  isRunning = true;
-  updateButtonStates();
-
-  timerInterval = setInterval(() => {
-    secondsRemaining--;
-    updateTimerDisplay();
-
-    if (secondsRemaining <= 0) {
-      completeSession();
-    }
-  }, 1000);
-}
-
-function pauseTimer() {
-  if (!isRunning) return;
-
-  isRunning = false;
-  clearInterval(timerInterval);
-  updateButtonStates();
-
-  showToast("Focus session paused", "warning");
-}
-
-function resetTimer() {
-  isRunning = false;
-  clearInterval(timerInterval);
-  secondsRemaining = focusMinutes * 60;
-  updateTimerDisplay();
-  updateButtonStates();
-}
-
-function completeSession() {
-  isRunning = false;
-  clearInterval(timerInterval);
-
-  const xpEarned = Math.round(
-    XP_PER_SESSION * (focusMinutes / MIN_FOCUS_MINUTES)
-  );
-  awardXp(xpEarned);
-
-  userData.sessionsCompleted++;
-  userData.totalFocusMinutes += focusMinutes;
-  saveUserData();
-
-  sessionsCount.textContent = userData.sessionsCompleted;
-  totalFocusTime.textContent = userData.totalFocusMinutes;
-
-  secondsRemaining = focusMinutes * 60;
-  updateTimerDisplay();
-  updateButtonStates();
-
-  showToast(`Focus session completed! +${xpEarned} XP`, "success");
-}
-
-function updateButtonStates() {
-  startTimerBtn.disabled = isRunning;
-  pauseTimerBtn.disabled = !isRunning;
-  resetTimerBtn.disabled = !isRunning && secondsRemaining === focusMinutes * 60;
-
-  increaseTimeBtn.disabled = isRunning;
-  decreaseTimeBtn.disabled = isRunning;
-
-  if (isRunning) {
-    increaseTimeBtn.style.opacity = "0.5";
-    decreaseTimeBtn.style.opacity = "0.5";
-  } else {
-    increaseTimeBtn.style.opacity = "1";
-    decreaseTimeBtn.style.opacity = "1";
-  }
-}
-
-function toggleFullscreen() {
-  if (isFullscreen) {
-    exitFullscreenFocus();
-  } else {
-    enterFullscreenFocus();
-  }
-}
-
-function enterFullscreenFocus() {
-  if (isFullscreen) return;
-
-  if (!fullscreenFocusElement) {
-    fullscreenFocusElement = document.createElement("div");
-    fullscreenFocusElement.className = "fullscreen-focus";
-    fullscreenFocusElement.innerHTML = `
-      <div class="focus-timer-container">
-        <div id="fullscreen-timer" class="text-5xl mb-6">${timerDisplay.textContent}</div>
-        <div class="focus-message">Stay focused! You're building a better you.</div>
-        <div class="mt-4 text-center">
-          <button id="fullscreen-exit" class="focus-btn bg-red-600 hover:bg-red-700">Exit Focus Mode</button>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(fullscreenFocusElement);
-
-    document
-      .getElementById("fullscreen-exit")
-      .addEventListener("click", exitFullscreenFocus);
-  }
-
-  const fullscreenTimer = document.getElementById("fullscreen-timer");
-  if (fullscreenTimer) {
-    fullscreenTimer.textContent = timerDisplay.textContent;
-  }
-
-  if (document.documentElement.requestFullscreen) {
-    document.documentElement.requestFullscreen().catch((err) => {
-      console.error(
-        `Error attempting to enable fullscreen mode: ${err.message}`
-      );
+  if (storyTabButton) {
+    storyTabButton.addEventListener("click", () => {
+      updateStoryUI(storyManager);
     });
   }
 
-  fullscreenFocusElement.style.display = "flex";
-  isFullscreen = true;
-
-  if (isRunning) {
-    startFullscreenTimerUpdates();
-  }
+  window.storyManager = storyManager;
+  return storyManager;
 }
 
-function exitFullscreenFocus() {
-  if (!isFullscreen) return;
+function updateStoryUI(storyManager) {
+  if (!storyContainer || !storyContent || !nextStoryInfo) return;
 
-  if (document.exitFullscreen && document.fullscreenElement) {
-    document.exitFullscreen().catch((err) => {
-      console.error(`Error attempting to exit fullscreen mode: ${err.message}`);
+  const latestContent = storyManager.getLatestUnlockedContent();
+  storyContent.innerHTML = '';
+
+  if (latestContent) {
+    const sectionTitle = document.createElement('h3');
+    sectionTitle.className = 'rpg-heading text-xl mb-4';
+    sectionTitle.textContent = formatSectionTitle(latestContent.sectionKey);
+    storyContent.appendChild(sectionTitle);
+
+    latestContent.content.forEach(line => {
+      const paragraph = document.createElement('p');
+      paragraph.className = 'mb-2 text-white';
+      paragraph.textContent = line;
+      storyContent.appendChild(paragraph);
     });
-  }
 
-  if (fullscreenFocusElement) {
-    fullscreenFocusElement.style.display = "none";
-  }
+    const availableSections = storyManager.getAvailableSections();
 
-  isFullscreen = false;
-}
+    if (availableSections.length > 1) {
+      const unlockedSections = document.createElement('div');
+      unlockedSections.className = 'mt-6 p-2 rpg-border';
 
-function handleFullscreenChange() {
-  isFullscreen = !!document.fullscreenElement;
+      const unlockedTitle = document.createElement('h4');
+      unlockedTitle.className = 'rpg-heading mb-2';
+      unlockedTitle.textContent = 'Unlocked Chapters';
+      unlockedSections.appendChild(unlockedTitle);
 
-  fullscreenToggleBtn.textContent = isFullscreen
-    ? "Exit Fullscreen"
-    : "Fullscreen";
-}
+      const chapterList = document.createElement('div');
+      chapterList.className = 'flex flex-wrap gap-2';
 
-function startFullscreenTimerUpdates() {
-  const fullscreenTimerInterval = setInterval(() => {
-    const fullscreenTimer = document.getElementById("fullscreen-timer");
-    if (isFullscreen && fullscreenTimer) {
-      fullscreenTimer.textContent = timerDisplay.textContent;
-    } else {
-      clearInterval(fullscreenTimerInterval);
+      availableSections.forEach(sectionIndex => {
+        const chapterBtn = document.createElement('button');
+        chapterBtn.className = 'focus-btn bg-rpg-brown hover:bg-rpg-dark-brown px-3 py-1';
+        chapterBtn.textContent = formatSectionTitle(storyManager.getSectionName(sectionIndex));
+
+        chapterBtn.addEventListener('click', () => {
+          displayStorySection(storyManager, sectionIndex);
+        });
+
+        chapterList.appendChild(chapterBtn);
+      });
+
+      unlockedSections.appendChild(chapterList);
+      storyContent.appendChild(unlockedSections);
     }
-  }, 1000);
+  } else {
+    const noContent = document.createElement('p');
+    noContent.className = 'text-center text-white';
+    noContent.textContent = 'Complete focus sessions to unlock story content!';
+    storyContent.appendChild(noContent);
+  }
+
+  const nextSectionInfo = storyManager.isNextSectionUnlocked();
+  nextStoryInfo.innerHTML = '';
+
+  const nextInfoText = document.createElement('p');
+  nextInfoText.className = 'text-center';
+
+  if (nextSectionInfo.levelDifference <= 0) {
+    nextInfoText.textContent = 'You have unlocked all available story content!';
+  } else {
+    nextInfoText.innerHTML = `Next story unlocks in <span class="text-rpg-gold font-bold">${nextSectionInfo.levelDifference}</span> more level${nextSectionInfo.levelDifference > 1 ? 's' : ''}!`;
+  }
+
+  nextStoryInfo.appendChild(nextInfoText);
 }
 
-function getXpForNextLevel(level) {
-  return Math.floor(BASE_XP_PER_LEVEL * Math.pow(level, 1.5));
+function formatSectionTitle(sectionKey) {
+  if (sectionKey === 'prologue') return 'Prologue';
+  if (sectionKey === 'epilogue') return 'Epilogue';
+
+  const match = sectionKey.match(/section(\d+)/);
+  if (match && match[1]) {
+    return `Chapter ${match[1]}`;
+  }
+
+  return sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1);
 }
 
-function updateXpDisplay() {
-  const nextLevelXp = getXpForNextLevel(userData.level);
+function displayStorySection(storyManager, sectionIndex) {
+  if (!storyContent) return;
 
-  levelDisplay.textContent = userData.level;
-  currentXpDisplay.textContent = userData.currentXp;
-  xpToLevelDisplay.textContent = nextLevelXp;
+  const sectionContent = storyManager.getSectionContent(sectionIndex);
+  if (!sectionContent) return;
 
-  const progressPercentage = (userData.currentXp / nextLevelXp) * 100;
-  xpProgress.style.width = `${progressPercentage}%`;
+  storyContent.innerHTML = '';
+
+  const sectionTitle = document.createElement('h3');
+  sectionTitle.className = 'rpg-heading text-xl mb-4';
+  sectionTitle.textContent = formatSectionTitle(storyManager.getSectionName(sectionIndex));
+  storyContent.appendChild(sectionTitle);
+
+  sectionContent.forEach(line => {
+    const paragraph = document.createElement('p');
+    paragraph.className = 'mb-2 text-white';
+    paragraph.textContent = line;
+    storyContent.appendChild(paragraph);
+  });
+
+  const backButton = document.createElement('button');
+  backButton.className = 'focus-btn bg-rpg-brown hover:bg-rpg-dark-brown mt-4';
+  backButton.textContent = 'Back to Latest Chapter';
+  backButton.addEventListener('click', () => {
+    updateStoryUI(storyManager);
+  });
+
+  storyContent.appendChild(backButton);
 }
 
-function awardXp(xpAmount) {
-  userData.currentXp += xpAmount;
-  userData.totalXp += xpAmount;
+function updateStoryAfterLevelUp() {
+  if (window.storyManager) {
+    const levelUpResult = window.storyManager.incrementUserLevel(0);
+    if (levelUpResult.newSectionUnlocked) {
+      showToast(`New story chapter unlocked!`, "success");
 
-  checkForLevelUp();
+      const storyNotification = Toastify({
+        text: "New story chapter available! Click to view.",
+        duration: 5000,
+        gravity: "bottom",
+        position: "center",
+        style: {
+          background: "linear-gradient(to right, #8a5a2b, #583a1e)",
+          border: "1px solid var(--rpg-gold)",
+        },
+        onClick: function () {
+          if (storyTabButton) {
+            storyTabButton.click();
+          }
+          updateStoryUI(window.storyManager);
+        },
+        stopOnFocus: true,
+      }).showToast();
+    }
 
-  saveUserData();
-
-  xpProgress.classList.add("xp-gain");
-  setTimeout(() => {
-    xpProgress.classList.remove("xp-gain");
-  }, 1000);
-
-  updateXpDisplay();
-}
-
-function checkForLevelUp() {
-  const nextLevelXp = getXpForNextLevel(userData.level);
-
-  while (userData.currentXp >= nextLevelXp) {
-    userData.level++;
-    userData.currentXp -= nextLevelXp;
-
-    levelDisplay.classList.add("level-up");
-    setTimeout(() => {
-      levelDisplay.classList.remove("level-up");
-    }, 1500);
-
-    showToast(`Level Up! You are now level ${userData.level}`, "success");
+    if (storyContainer && window.getComputedStyle(storyContainer).display !== 'none') {
+      updateStoryUI(window.storyManager);
+    }
   }
 }
 
-function changeCharacter() {
-  userData.currentCharacterIndex =
-    (userData.currentCharacterIndex + 1) % characterImages.length;
-  saveUserData();
-
-  avatarImg.src = `/images/${characterImages[userData.currentCharacterIndex]}`;
-
-  const characterName = characterImages[userData.currentCharacterIndex].replace(
-    ".png",
-    ""
-  );
-  showToast(`Character changed to ${characterName}!`, "info");
-}
-
-function handleKeyboardShortcuts(e) {
-  if (e.altKey && e.key.toLowerCase() === "s" && !startTimerBtn.disabled) {
-    e.preventDefault();
-    startTimer();
-  }
-
-  if (e.altKey && e.key.toLowerCase() === "p" && !pauseTimerBtn.disabled) {
-    e.preventDefault();
-    pauseTimer();
-  }
-
-  if (e.altKey && e.key.toLowerCase() === "r" && !resetTimerBtn.disabled) {
-    e.preventDefault();
-    resetTimer();
-  }
-
-  if (e.altKey && e.key.toLowerCase() === "f") {
-    e.preventDefault();
-    toggleFullscreen();
-  }
-
-  if (e.altKey && e.key === "ArrowUp" && !isRunning) {
-    e.preventDefault();
-    increaseTime();
-  }
-
-  if (e.altKey && e.key === "ArrowDown" && !isRunning) {
-    e.preventDefault();
-    decreaseTime();
-  }
-
-  if (e.key === "Escape" && isFullscreen) {
-    exitFullscreenFocus();
-  }
-}
-
-function saveUserData() {
-  localStorage.setItem("userData", JSON.stringify(userData));
-}
-
-function showToast(message, type) {
-  const bgColors = {
-    success: "linear-gradient(to right, #00b09b, #96c93d)",
-    error: "linear-gradient(to right, #ff5f6d, #ffc371)",
-    info: "linear-gradient(to right, #2193b0, #6dd5ed)",
-    warning: "linear-gradient(to right, #f6d365, #fda085)",
-  };
-
-  Toastify({
-    text: message,
-    duration: 3000,
-    gravity: "top",
-    position: "right",
-    style: {
-      background: bgColors[type] || bgColors.info,
-    },
-    stopOnFocus: true,
-  }).showToast();
-}
-
-document.addEventListener("DOMContentLoaded", initializeApp);
