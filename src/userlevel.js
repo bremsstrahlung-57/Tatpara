@@ -23,7 +23,7 @@ class UserLevelChecker {
       return this.currentLevel;
     }
   
-    // Check if user meets level requirement
+
     meetsLevelRequirement(requiredLevel) {
       return this.currentLevel >= requiredLevel;
     }
