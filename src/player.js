@@ -240,7 +240,7 @@ function createVolumeControl() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const focusTabButton = document.getElementById("focus-tab-button");
+  // const focusTabButton = document.getElementById("focus-tab-button");
   const storyTabButton = document.getElementById("story-tab-button");
   const tasksTabButton = document.getElementById("tasks-tab-button");
   const navStoryButton = document.getElementById("nav-story");
@@ -263,14 +263,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const storyScrollHandle = document.querySelector(".story-scroll-handle");
   const mainContent = document.querySelector(".main-content");
 
-  function showFocus() {
-    focusContainer.style.display = "block";
-    storyContainer.style.display = "none";
-    tasksContainer.style.display = "none";
-    focusTabButton.classList.add("border-rpg-gold");
-    storyTabButton.classList.remove("border-rpg-gold");
-    tasksTabButton.classList.remove("border-rpg-gold");
-  }
+  // function showFocus() {
+  //   focusContainer.style.display = "block";
+  //   storyContainer.style.display = "none";
+  //   tasksContainer.style.display = "none";
+  //   focusTabButton.classList.add("border-rpg-gold");
+  //   storyTabButton.classList.remove("border-rpg-gold");
+  //   tasksTabButton.classList.remove("border-rpg-gold");
+  // }
 
   function showStory() {
     focusContainer.style.display = "none";
@@ -309,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mainContent.classList.toggle("shifted");
   }
 
-  focusTabButton.addEventListener("click", showFocus);
+  // focusTabButton.addEventListener("click", showFocus);
   storyTabButton.addEventListener("click", showStory);
   tasksTabButton.addEventListener("click", showTasks);
 

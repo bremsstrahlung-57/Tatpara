@@ -3,6 +3,7 @@ import "toastify-js/src/toastify.css";
 
 import StoryManager from "./storymanager.js";
 import { updateTasksContainer } from "./tasks-container.js";
+import { fetchMotivationalQuote } from "./api.js";
 
 const storyTabButton = document.getElementById("story-tab-button");
 const storyContainer = document.getElementById("story-container");
@@ -28,6 +29,9 @@ const xpToLevelDisplay = document.getElementById("xp-to-level");
 const xpProgress = document.getElementById("xp-progress");
 const sessionsCount = document.getElementById("sessions-count");
 const totalFocusTime = document.getElementById("total-focus-time");
+
+// Quote element
+const quoteElement = document.getElementById("quote");
 
 const characterImages = [
   "monk.png",
@@ -113,6 +117,9 @@ function initializeApp() {
   const storyManager = initializeStorySystem();
 
   initializeTaskSystem(storyManager);
+
+  // Fetch and display motivational quote
+  fetchAndDisplayQuote();
 }
 
 function initializeStorySystem() {
@@ -1101,4 +1108,32 @@ function showToast(message, type) {
     },
     stopOnFocus: true,
   }).showToast();
+}
+
+/**
+ * Fetches a motivational quote from the API and displays it
+ */
+async function fetchAndDisplayQuote() {
+  if (!quoteElement) return;
+
+  quoteElement.textContent = "Loading wisdom...";
+
+  try {
+    const quote = await fetchMotivationalQuote();
+
+    quoteElement.innerHTML = quote;
+
+    const refreshButton = document.createElement("button");
+    refreshButton.className =
+      "focus-btn bg-rpg-brown hover:bg-rpg-dark-brown px-3 py-1 mt-2";
+    refreshButton.textContent = "New Quote";
+    refreshButton.addEventListener("click", fetchAndDisplayQuote);
+
+    quoteElement.appendChild(document.createElement("br"));
+    quoteElement.appendChild(refreshButton);
+  } catch (error) {
+    console.error("Failed to fetch quote:", error);
+    quoteElement.textContent =
+      "Wisdom comes to those who seek it... and when the server is running.";
+  }
 }

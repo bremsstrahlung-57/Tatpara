@@ -7,11 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/src/style.css" />
   <link rel="stylesheet" href="/src/mobile.css" />
+  <link rel="stylesheet" href="/src/mobile.css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <title>Tatpara</title>
 </head>
 
-<body class="crt" onload="startTime()">
+<body class="crt">
   <div class="story-scroll">
     <div class="story-scroll-handle"></div>
     <div class="story-scroll-content">
@@ -41,6 +42,11 @@
           </a>
         </div>
       </nav>
+    </div>
+
+    <!-- API call Quote -->
+    <div class="shadow border m-4 p-6 w-full max-w-md flex flex-col items-center rounded-lg rpg-border mobile">
+      <p id="quote"></p>
     </div>
 
     <div class="shadow border m-4 p-6 w-full max-w-md flex flex-col items-center rounded-lg rpg-border mobile">
@@ -115,7 +121,7 @@
     <div class="rpg-border mt-6 w-full max-w-md p-4 mobile">
       <h2 class="rpg-heading text-2xl mb-4">Your Journey</h2>
       <div class="tabs flex border-b border-rpg-dark-gold">
-        <button id="focus-tab-button" class="tab-btn px-4 py-2 border-b-2 border-rpg-gold">Focus</button>
+        <!-- <button id="focus-tab-button" class="tab-btn px-4 py-2 border-b-2 border-rpg-gold">Focus</button> -->
         <button id="story-tab-button" class="tab-btn px-4 py-2">Story</button>
         <button id="tasks-tab-button" class="tab-btn px-4 py-2">Tasks</button>
       </div>
