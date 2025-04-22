@@ -25,7 +25,7 @@ npm run dev       # run development server
 For building & previewing:
 ```bash
 npm run build     # build for production
-npm run preview   # preview production build`\
+npm run preview   # preview production build`
 ```
 3. Backend Setup (FastAPI + Groq API):
 ```bash

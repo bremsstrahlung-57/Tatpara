@@ -35,6 +35,7 @@ Basically, it’s productivity with plot twists. Because adulting is hard—but 
 - [Sagar Sharma](https://github.com/bremsstrahlung-57)
 - [Vedansh Rai](https://github.com/Mr-Underdog)
 - [Lavanya Saini](https://github.com/Lavan08-op)
+- []
 
 ### Your Approach:
 
@@ -206,6 +207,8 @@ Aside from the usual tech stack hacks, we learned the value of simple design. So
 The best part? Turning our daily tasks into epic quests. Seriously, when you unlock a new story chapter for finally doing your laundry, it feels like you’ve defeated a dragon. Also, brainstorming the “guild chat” feature was a highlight—we almost went off the rails with ridiculous ideas, but hey, it made the project even more unique.
 
 **Shout-Outs**:
+
+[Yashasvi Tiwari](https://www.linkedin.com/in/yashasvi-tiwari-2308702ab?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app ) for helping us creating our Project logo.
 
 Massive shout-out to the hackathon organizers for creating a platform where we could bring ideas to life. And to the team—couldn’t have asked for better collaborators. You guys are the true heroes of this story.
 
