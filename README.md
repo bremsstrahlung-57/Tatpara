@@ -32,9 +32,9 @@ Basically, it’s productivity with plot twists. Because adulting is hard—but 
 
 ### Team Members:
 
-- [Sagar Sharma](https://github.com/bremsstrahlung-57)
-- [Vedansh Rai](https://github.com/Mr-Underdog)
-- [Lavanya Saini](https://github.com/Lavan08-op)
+- [Sagar Sharma](https://github.com/bremsstrahlung-57) (Leader)
+- [Vedansh Rai](https://github.com/Mr-Underdog) (Member)
+- [Lavanya Saini](https://github.com/Lavan08-op) (Member)
 
 ### Your Approach:
 
