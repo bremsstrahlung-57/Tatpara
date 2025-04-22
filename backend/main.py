@@ -11,7 +11,8 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://tatpara.netlify.app"],  # Removed trailing slash
+    allow_origins=["https://tatpara.netlify.app"],
+    # allow_origins=["*"],  # Use this only during development
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -1,72 +1,97 @@
-## Prerequisites
+# **CONTRIBUTION.md**
 
-- [Node.js](https://nodejs.org/en/) (which includes npm) 
-- Any preferred package manager of your choice 
+## 🚀 **Project Setup Guide**
 
-## Setup
+### **Prerequisites**
+- Node.js (includes npm)
 
-1. **Clone the repository:**
+- Python 3.10+ (with pip)
 
-   ```bash
-   git clone https://github.com/bremsstrahlung-57/tatpara.git
-   cd tatpara
-   ```
+- Any preferred code editor (we recommend VS Code)
 
-2. **Install dependencies:**
+- Git & GitHub account
 
-    ```bash
-    npm install
-    ```
+## 🛠️**Local Development Setup**
+1. Clone the Repository:
+```bash
+git clone https://github.com/bremsstrahlung-57/tatpara.git
+cd tatpara
+```
+2. Frontend Setup (Vite + Tailwind):
+```bash
+npm install       # install dependencies
+npm run dev       # run development server
+```
+For building & previewing:
+```bash
+npm run build     # build for production
+npm run preview   # preview production build`\
+```
+3. Backend Setup (FastAPI + Groq API):
+```bash
+cd backend
+python -m venv .venv
+# activate virtual environment:
+# For Windows:
+.venv\Scripts\activate
+# For Linux/macOS:
+source .venv/bin/activate
 
-3. **Run the development server:**
-    ```bash
-    npm run dev
-    ```
+pip install -r requirements.txt
+uvicorn main:app --reload  # start backend server
+```
+Make sure your `.env` contains the required keys (e.g., Groq API key).
 
-- (After done coding)
-4. **Build for production:**
-    ```bash
-    npm run build
-    ```
+## 🧠 **Git Workflow & Contribution Guidelines**
 
-4. **Preview production build:**
-    ```sh
-    npm run preview
-    ```
-**Git Workflow & Contributing**
+### For Core Team Members & Open Source Contributors:
+✅ Basic Rules:
+- Always work on a separate branch (no direct commits to `main`/`master`).
 
-For team members and contributors, please follow these guidelines:
+- Commit messages should be clear: use concise, descriptive messages (e.g., `fix: add null check to XP counter`or `feat: guild chat UI`).
 
-- **Clone the repository**: Simply clone if you're a team member.
+- Test before pushing. Especially if working with backend or stateful frontend logic.
 
-- **Set Upstream Remote** (for forked repos):
+### 🧩 **Git Commands Cheat Sheet**
+**Set upstream** (for forks only):
+```bash
+git remote add upstream https://github.com/bremsstrahlung-57/tatpara.git
+git fetch upstream
+```
+**Create a feature branch:**
+```bash
+git checkout -b feat/your-feature-name
+```
+**Push your branch:**
+```bash
+git push --set-upstream origin feat/your-feature-name
+```
+**Keep in sync with the main branch:**
 
-    If you've forked the repo, add the original as an upstream remote:
-    ```bash
-    git remote add upstream https://github.com/bremsstrahlung-57/tatpara.git
-    git fetch upstream
-    ```
-- **Create a new branch for each feature or bug fix:**
-    ```bash
-    git checkout -b feature/your-feature-name
-    ```
-- **Push your branch and set the upstream:**
-    ```bash
-    git push --set-upstream origin feature/your-feature-name
-    ```
-- **Keep your branch updated with the main branch:** 
+If working from a **fork**:
+```bash
+git pull upstream main
+```
+If working on the main **repo**:
+```bash
+git pull origin main
+```
 
-    If you're working on a fork:
-    ```bash
-    git pull upstream master
-    ```
-    If you're working directly from the main repository:
-    ```bash
-    git pull origin master
-    ```
-- **Open a pull request:**
+### 🧪 **Submitting Your Work**
 
-    Once your feature is complete, open a pull request and include a clear description of your changes. For major changes, please discuss them by opening an issue first.
+- Open a Pull Request when your feature is complete.
 
+- Clearly explain what your PR does and why it matters.
 
-**Happy coding! ^_^** 
+- Mention related issues (if any) using GitHub keywords (e.g., `Closes #12`).
+
+- For major changes, open an issue first and discuss it with the team before making the PR.
+
+##🌟 **Pro Tips**
+- Stay consistent with code style.
+
+- Don’t commit secrets or .env files.
+
+- Respect the fantasy RPG vibe—commit messages like slayed the goblin of broken CSS are totally valid (and encouraged).
+
+*Happy questing, coder! You’re not just contributing—you’re shaping the fate of Tatpara.* 🧙‍♂️🧩

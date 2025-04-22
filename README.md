@@ -2,7 +2,7 @@
 
 # 🚀 Project Title
 
-> Tatpara: Turns productivity into a plot twist.
+> Tatpara: Become the chosen one... by doing the dishes.
 
 ---
 
@@ -35,9 +35,6 @@ Basically, it’s productivity with plot twists. Because adulting is hard—but 
 - [Sagar Sharma](https://github.com/bremsstrahlung-57)
 - [Vedansh Rai](https://github.com/Mr-Underdog)
 - [Lavanya Saini](https://github.com/Lavan08-op)
-- [Yashasvi Tiwari]()
-
-  _(Add links if you want)_
 
 ### Your Approach:
 
@@ -67,41 +64,45 @@ Basically, it’s productivity with plot twists. Because adulting is hard—but 
 ### Core Technologies Used:
 
 - **Frontend**:
-Built using Vite with vanilla JavaScript for a fast and lightweight setup. Tailwind CSS handles the styling, allowing for rapid prototyping with a clean and responsive UI.
+Built using Vite with vanilla JavaScript. Tailwind and CSS handles the styling.
 
 - **Backend**:
-No backend for now. The app is fully frontend-based to keep it simple and efficient for the hackathon. Backend integration is on the roadmap for features like user accounts and cloud saves.
+FastAPI for creating API calls.
 
 - **Database**:
 No dedicated database. We're using localStorage to manage user data like task progress, XP, and unlocked story content.
 
 - **APIs**:
-None at this stage. All functionality is self-contained. Future versions may include APIs for dynamic content, AI-generated stories, or real-time syncing.
+We used Groq API to have some motivational quotes through FastAPI.
 
 - **Hosting**:
-Deployed on Netlify for fast builds, easy deployment, and reliable hosting.
+Frontend deployed through [Netlify](https://www.netlify.com/) and backend is rendered by [Render](https://render.com/).
 
 
 
 ### Sponsor Technologies Used (if any):
 
-- [✅] **Groq:** _How you used Groq_
+- [✅] **Groq:** Our in-game "AI Sensei" that drops motivational gems and life hacks like a digital monk. FastAPI talks to Groq to keep players inspired between tasks.
 
 ---
 
 ## ✨ Key Features
 
-- ✅ **Habit Tracking with XP Rewards**:
+- **Habit Tracking with XP Rewards**:
 Track your daily tasks and earn XP for completing them. The more you do, the stronger you get, just like a real RPG character!
 
-- ✅ **Story Progression**:
+- **Story Progression**:
 Unlock a unique, evolving storyline as you level up by completing tasks. Your personal quest grows with you, revealing new chapters and twists.
 
-- ✅ **Focus Timer**:
+- **Focus Timer**:
 Use the built-in focus timer to boost productivity. Set your focus periods and dive into tasks, gamifying the process to keep you engaged and on track.
 
-- ✅ **Task Management**:
+- **Task Management**:
 Organize and manage your daily tasks easily. Categorize them by priority and see your progress in real-time as you complete them, earning rewards along the way.
+
+- **Wise Mentor Quotes (Powered by AI)**: 
+Your digital sensei serves up motivational quotes and life lessons as you level up.
+
 
 Add images, GIFs, or screenshots if helpful!
 
@@ -116,11 +117,9 @@ Add images, GIFs, or screenshots if helpful!
 
 ## ✅ Tasks & Bonus Checklist
 
-- [ ] **All members of the team completed the mandatory task - Followed at least 2 of our social channels and filled the form** (Details in Participant Manual)
-- [ ] **All members of the team completed Bonus Task 1 - Sharing of Badges and filled the form (2 points)** (Details in Participant Manual)
-- [ ] **All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points)** (Details in Participant Manual)
-
-_(Mark with ✅ if completed)_
+- [✅] **All members of the team completed the mandatory task - Followed at least 2 of our social channels and filled the form**
+- [ ] **All members of the team completed Bonus Task 1 - Sharing of Badges and filled the form (2 points)**
+- [ ] **All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points)**
 
 ---
 
@@ -136,6 +135,10 @@ _(Mark with ✅ if completed)_
 
 - Git (for version control and cloning the repo)
 
+- FastAPI (Python Library)
+
+- Groq (For quotes)
+
 ### Local Setup:
 
 ```bash
@@ -146,8 +149,19 @@ git clone https://github.com/bremsstrahlung-57/tatpara
 cd tatpara
 npm install
 
+# For python backend
+cd backend
+python -m venv .venv # make a virtual enviroment
+.venv\Scripts\activate # windows
+source .venv/bin/activate #linux
+pip install -r requirements.txt
+
+
 # Start development server
 npm run dev
+
+# For python backend
+uvicorn main:app --reload
 ```
 
 ---
@@ -167,8 +181,11 @@ Localize the app into multiple languages to reach a global audience. Improve acc
 
 ## 📎 Resources / Credits
 
-- [Toastify-JS](https://apvarun.github.io/toastify-js/)
-- [Flaticons](https://www.flaticon.com/)
+- [Toastify-JS](https://apvarun.github.io/toastify-js/) — toast notifications that slap.
+- [Flaticons](https://www.flaticon.com/) — icons with ✨personality✨.
+- [Groq API](https://groq.com) — for generating AI-powered life advice, motivational quotes, and reminding us to hydrate.
+- [ChatGPT (OpenAI)](https://openai.com/chatgpt) — for brainstorming plot twists, writing prompts, and keeping us sane during merge conflicts.
+- [Claude (Anthropic)](https://www.anthropic.com/index/claude) — for refining our ideas, polishing our text, and being the chill AI friend who always vibes with your vision.
 
 ---
 
