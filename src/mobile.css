@@ -1,6 +1,6 @@
 @import url("./style.css");
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 640px) {
     .mobile{
         width: 85%;
     }    
@@ -11,9 +11,9 @@
         padding: 1px;
     }
     .font32MOBILE{
-        font-size: 32px;
+        font-size: 22px;
     }
     .wImgMOBILE{
-        width: 48px;
+        width: 36px;
     }
 }

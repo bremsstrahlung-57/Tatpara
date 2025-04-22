@@ -11,37 +11,56 @@
   <title>Tatpara</title>
 </head>
 
-<body class="crt">
-  <div class="h-full w-full flex justify-center items-center flex-col">
+<body class="crt" onload="startTime()">
+  <div class="story-scroll">
+    <div class="story-scroll-handle"></div>
+    <div class="story-scroll-content">
+      <h2 class="rpg-heading text-2xl mb-4">Your Journey</h2>
+      <div class="tabs flex border-b border-rpg-dark-gold">
+        <button id="story-scroll-tab-button" class="tab-btn px-4 py-2 border-b-2 border-rpg-gold">Story</button>
+        <button id="tasks-scroll-tab-button" class="tab-btn px-4 py-2">Tasks</button>
+      </div>
+
+      <div id="story-scroll-content" class="py-4"></div>
+
+      <div id="tasks-scroll-content" class="py-4" style="display: none;">
+        <div class="task-list" id="task-list"> </div>
+        <button id="add-task-btn" class="add-task-btn">+ Add Custom Task</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-full w-full flex justify-center items-center flex-col main-content">
     <div class="shadow border heading h-full w-full flex justify-center items-center text-[40px] rpg-border" id="app">
       <nav class="w-full flex items-center justify-between pr-4 pl-4">
-        <a class="user font32MOBILE" href="/story.html">Story</a>
+        <button id="nav-story" class="user font32MOBILE">Story</button>
+        <div class="text-sm sm:text-2xl sm:p-2" id="txt"></div>
         <div class="flex items-center gap-4">
-          <!-- <div class="rpg-heading text-xl">Tatpara</div> -->
           <a class="avatar point" href="#">
-            <img class="wImgMOBILE" src="/images/monk.png" alt="monk">
+            <img class="wImgMOBILE" src="/images/monk.png" title="Thanks to https://www.flaticon.com/free-icons/rpg.">
           </a>
         </div>
       </nav>
     </div>
-    
-    <!-- Focus Timer Section -->
+
     <div class="shadow border m-4 p-6 w-full max-w-md flex flex-col items-center rounded-lg rpg-border mobile">
       <h2 class="rpg-heading text-2xl mb-4">Focus Timer</h2>
       <div class="flex items-center justify-center mb-4">
         <button id="decrease-time" class="time-adjust-btn">-</button>
-        <div class="text-3xl mx-4" id="timer-display">30:00</div>
+        <div class="text-3xl mx-4 rpg-font" id="timer-display">30:00</div>
         <button id="increase-time" class="time-adjust-btn">+</button>
       </div>
-      
+
       <div class="flex space-x-4 mb-6">
         <button id="start-timer" class="focus-btn bg-(--rpg-brown) hover:bg-yellow-900 mobile-btn">Start Focus</button>
-        <button id="pause-timer" class="focus-btn bg-(--rpg-brown) hover:bg-yellow-900 mobile-btn" disabled>Pause</button>
-        <button id="reset-timer" class="focus-btn bg-(--rpg-brown) hover:bg-yellow-900 mobile-btn" disabled>Reset</button>
-        <button id="fullscreen-toggle" class="focus-btn bg-(--rpg-brown) hover:bg-yellow-900 mobile-btn">Fullscreen</button>
+        <button id="pause-timer" class="focus-btn bg-(--rpg-brown) hover:bg-yellow-900 mobile-btn"
+          disabled>Pause</button>
+        <button id="reset-timer" class="focus-btn bg-(--rpg-brown) hover:bg-yellow-900 mobile-btn"
+          disabled>Reset</button>
+        <button id="fullscreen-toggle"
+          class="focus-btn bg-(--rpg-brown) hover:bg-yellow-900 mobile-btn">Fullscreen</button>
       </div>
-      
-      <!-- Experience Bar -->
+
       <div class="w-full mb-2 xp-container">
         <div class="flex justify-between text-sm mb-1">
           <div class="flex items-center">
@@ -54,16 +73,15 @@
           <div id="xp-progress" class="h-2.5 rounded-full" style="width: 0%"></div>
         </div>
       </div>
-      
-      <!-- Session Stats -->
+
       <div class="mt-4 w-full stats-container">
         <div class="flex justify-between items-center">
           <div>
-            <span class="stats-label">Sessions Completed:</span> 
+            <span class="stats-label">Sessions Completed:</span>
             <span class="stats-value" id="sessions-count">0</span>
           </div>
           <div>
-            <span class="stats-label">Total Focus Time:</span> 
+            <span class="stats-label">Total Focus Time:</span>
             <span class="stats-value" id="total-focus-time">0</span> min
           </div>
         </div>
@@ -76,35 +94,49 @@
         <div class="flex justify-center items-center m-2 p-2 text-3xl">
           <button id="previous"
             class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px] mobile-btn-bgm">
-            <a class="glow">
-              previous
-            </a>
+            <a class="glow">previous</a>
           </button>
           <button id="play"
             class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px] mobile-btn-bgm">
-            <a class="glow">
-              play
-            </a>
+            <a class="glow">play</a>
           </button>
           <button id="pause"
             class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px] mobile-btn-bgm">
-            <a class="glow">
-              pause
-            </a>
+            <a class="glow">pause</a>
           </button>
           <button id="next"
             class="music-btn mr-2 ml-2 cursor-pointer pl-4 pr-4 border-2 rounded-[1px] max-md:text-[16px] mobile-btn-bgm">
-            <a class="glow">
-              next
-            </a>
+            <a class="glow">next</a>
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="rpg-border mt-6 w-full max-w-md p-4 mobile">
+      <h2 class="rpg-heading text-2xl mb-4">Your Journey</h2>
+      <div class="tabs flex border-b border-rpg-dark-gold">
+        <button id="focus-tab-button" class="tab-btn px-4 py-2 border-b-2 border-rpg-gold">Focus</button>
+        <button id="story-tab-button" class="tab-btn px-4 py-2">Story</button>
+        <button id="tasks-tab-button" class="tab-btn px-4 py-2">Tasks</button>
+      </div>
+
+      <div id="focus-container" class="py-4"></div>
+
+      <div id="story-container" class="py-4" style="display: none;">
+        <div class="rpg-border p-4 bg-opacity-50 bg-black">
+          <div id="story-content" class="mb-4 max-h-80 overflow-y-auto scrollbar pr-2"></div>
+          <div id="next-story-info" class="mt-4 text-rpg-gold"></div>
+        </div>
+      </div>
+
+      <div id="tasks-container" class="py-4" style="display: none;"></div>
     </div>
   </div>
 
   <script type="module" src="/src/main.js"></script>
   <script type="module" src="/src/player.js"></script>
+  <script type="module" src="/src/clock.js"></script>
+
 </body>
 
 </html>
