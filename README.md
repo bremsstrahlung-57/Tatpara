@@ -35,7 +35,6 @@ Basically, it’s productivity with plot twists. Because adulting is hard—but 
 - [Sagar Sharma](https://github.com/bremsstrahlung-57)
 - [Vedansh Rai](https://github.com/Mr-Underdog)
 - [Lavanya Saini](https://github.com/Lavan08-op)
-- []
 
 ### Your Approach:
 
