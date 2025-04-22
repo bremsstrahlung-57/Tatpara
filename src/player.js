@@ -238,3 +238,84 @@ function createVolumeControl() {
     document.querySelector("#play").parentNode.parentNode;
   musicControlsDiv.appendChild(volumeContainer);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const focusTabButton = document.getElementById("focus-tab-button");
+  const storyTabButton = document.getElementById("story-tab-button");
+  const tasksTabButton = document.getElementById("tasks-tab-button");
+  const navStoryButton = document.getElementById("nav-story");
+
+  const storyScrollTabButton = document.getElementById(
+    "story-scroll-tab-button"
+  );
+  const tasksScrollTabButton = document.getElementById(
+    "tasks-scroll-tab-button"
+  );
+
+  const storyScrollContent = document.getElementById("story-scroll-content");
+  const tasksScrollContent = document.getElementById("tasks-scroll-content");
+
+  const focusContainer = document.getElementById("focus-container");
+  const storyContainer = document.getElementById("story-container");
+  const tasksContainer = document.getElementById("tasks-container");
+
+  const storyScroll = document.querySelector(".story-scroll");
+  const storyScrollHandle = document.querySelector(".story-scroll-handle");
+  const mainContent = document.querySelector(".main-content");
+
+  function showFocus() {
+    focusContainer.style.display = "block";
+    storyContainer.style.display = "none";
+    tasksContainer.style.display = "none";
+    focusTabButton.classList.add("border-rpg-gold");
+    storyTabButton.classList.remove("border-rpg-gold");
+    tasksTabButton.classList.remove("border-rpg-gold");
+  }
+
+  function showStory() {
+    focusContainer.style.display = "none";
+    storyContainer.style.display = "block";
+    tasksContainer.style.display = "none";
+    focusTabButton.classList.remove("border-rpg-gold");
+    storyTabButton.classList.add("border-rpg-gold");
+    tasksTabButton.classList.remove("border-rpg-gold");
+  }
+
+  function showTasks() {
+    focusContainer.style.display = "none";
+    storyContainer.style.display = "none";
+    tasksContainer.style.display = "block";
+    focusTabButton.classList.remove("border-rpg-gold");
+    storyTabButton.classList.remove("border-rpg-gold");
+    tasksTabButton.classList.add("border-rpg-gold");
+  }
+
+  function showStoryScrollTab() {
+    storyScrollContent.style.display = "block";
+    tasksScrollContent.style.display = "none";
+    storyScrollTabButton.classList.add("border-rpg-gold");
+    tasksScrollTabButton.classList.remove("border-rpg-gold");
+  }
+
+  function showTasksScrollTab() {
+    storyScrollContent.style.display = "none";
+    tasksScrollContent.style.display = "block";
+    storyScrollTabButton.classList.remove("border-rpg-gold");
+    tasksScrollTabButton.classList.add("border-rpg-gold");
+  }
+
+  function toggleStoryScroll() {
+    storyScroll.classList.toggle("open");
+    mainContent.classList.toggle("shifted");
+  }
+
+  focusTabButton.addEventListener("click", showFocus);
+  storyTabButton.addEventListener("click", showStory);
+  tasksTabButton.addEventListener("click", showTasks);
+
+  storyScrollTabButton.addEventListener("click", showStoryScrollTab);
+  tasksScrollTabButton.addEventListener("click", showTasksScrollTab);
+
+  navStoryButton.addEventListener("click", toggleStoryScroll);
+  storyScrollHandle.addEventListener("click", toggleStoryScroll);
+});
