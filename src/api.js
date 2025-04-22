@@ -3,7 +3,7 @@
  */
 
 const API_BASE_URL =
-  "https://tatpara.onrender.com/motivation";
+  "https://tatpara.onrender.com/";
 
 /**
  * Fetches a motivational quote from the FastAPI backend
