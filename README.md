@@ -140,7 +140,7 @@ Your digital sensei serves up motivational quotes and life lessons as you level 
 
 - FastAPI (Python Library)
 
-- Groq (For quotes)
+- Groq API(For quotes)
 
 ### Local Setup:
 
