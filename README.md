@@ -104,14 +104,17 @@ Organize and manage your daily tasks easily. Categorize them by priority and see
 Your digital sensei serves up motivational quotes and life lessons as you level up.
 
 
-Add images, GIFs, or screenshots if helpful!
+![main page](/public/images/image.png)
+![sidebar story](/public/images/image-1.png)
+![sidebar tasks](/public/images/image-2.png)
+![bgm and story](/public/images/image-3.png)
+![bgm and tasks](/public/images/image-4.png)
 
 ---
 
 ## 📽️ Demo & Deliverables
 
-- **Demo Video Link:** [Paste YouTube or Loom link here]
-- **Pitch Deck / PPT Link:** [Paste Google Slides / PDF link here]
+- **Demo Video Link:** https://www.loom.com/share/c7496259bdf34c4e9904db1fd12d6f3b
 
 ---
 
